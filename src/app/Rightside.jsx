@@ -77,7 +77,7 @@ export default function Rightside({
           </div>
           {weatherIconRight(Rcondition)}
           <div className="h-[120px] ml-[40px]">
-            <h2 className="text-white text-8xl  bg-gradient-to-b from-slate-800 to-gray-300 inline-block text-transparent bg-clip-text">
+            <h2 className="text-black text-8xl bg-gradient-to-b from-slate-800 to-gray-300 inline-block text-transparent bg-clip-text">
               {Rweather}°C
             </h2>
           </div>
