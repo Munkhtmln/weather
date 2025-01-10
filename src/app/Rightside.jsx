@@ -1,15 +1,50 @@
-import { Moon } from "@/icons/Moon";
+import { Moon } from "../icons/Moon";
+import Rmood from "../components/Rmood";
 
 export default function Rightside({
   Rweather,
-  getweather,
   changecity,
-  setSearched,
   date,
-  setDate,
   Rcondition,
-  setRCondition,
+  Rmod,
+  setRMod,
 }) {
+  const Right = { Rweather, changecity, date, Rcondition, Rmod, setRMod };
+  const weatherIconRight = () => {
+    const Icons = Rcondition.toLowerCase();
+    switch (true) {
+      case Icons.includes("mist"):
+        return <img src="/Nclouds.png" alt="" />;
+    }
+    switch (true) {
+      case Icons.includes("sunny"):
+        return <img src="/Nclouds.png" alt="" />;
+    }
+    switch (true) {
+      case Icons.includes("cloud"):
+        return <img src="/Nclouds.png" alt="" />;
+    }
+    switch (true) {
+      case Icons.includes("rain"):
+        return <img src="/Nrain.png" alt="" />;
+    }
+    switch (true) {
+      case Icons.includes("snow"):
+        return <img src="/Nsnow.png" alt="" />;
+    }
+    switch (true) {
+      case Icons.includes("wind"):
+        return <img src="/Nwind.png" alt="" />;
+    }
+    switch (true) {
+      case Icons.includes("clear"):
+        return <img src="/Moon.png" alt="" />;
+    }
+    switch (true) {
+      case Icons.includes("thunder"):
+        return <img src="/Nstorm.png" alt="" />;
+    }
+  };
   return (
     <div className=" bg-[#0F141E]  w-[50vw] h-[100vh] rounded-[20px]">
       <div className=" relative m-auto mt-40 w-[350px] h-[800px]">
@@ -17,13 +52,18 @@ export default function Rightside({
           <Moon />
         </div>
         <div className=" relative bg-[rgba(17,24,39)] backdrop-blur-3xl flex  size-full w-[400px] flex-col rounded-[50px] ">
-          <p className="text-white">{date}</p>
-          <div className="flex">
-            <h1 className="text-white text-[50px] flex">{changecity}</h1>
+          <p className=" text-gray-400 bg-#9CA3AF mt-[34px] ml-[38px] font-medium text-[20px]">
+            {date}
+          </p>
+          <div className="flex justify-between">
+            <h1 className="text-white text-[50px] ml-4 font-bold flex">
+              {changecity}
+            </h1>
             <svg
+              className="mr-6 mt-5 ml-8"
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
+              width="34"
+              height="34"
               viewBox="0 0 24 24"
               fill="white"
               stroke="currentColor"
@@ -35,17 +75,21 @@ export default function Rightside({
               <circle cx="12" cy="10" r="3" />
             </svg>
           </div>
-          <img className="w-[250px] m-auto" src="/moon.png" alt="" />
-          <h2 className="text-white text-8xl">{Rweather}</h2>
-          <p className="text-5xl text-white">{Rcondition}</p>
-          <div className="flex gap-20 m-auto">
+          {weatherIconRight(Rcondition)}
+          <div className="h-[120px] ml-[40px]">
+            <h2 className="text-white text-8xl  bg-gradient-to-b from-slate-800 to-gray-300 inline-block text-transparent bg-clip-text">
+              {Rweather}°C
+            </h2>
+          </div>
+          <p className=" text-blue-800 text-2xl ml-[40px]">{Rcondition}</p>
+          <div className="flex justify-between m-auto w-[318px] h-[32px]">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
               viewBox="0 0 24 24"
-              fill="white"
-              stroke="currentColor"
+              fill="none"
+              stroke="white"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -58,8 +102,8 @@ export default function Rightside({
               width="24"
               height="24"
               viewBox="0 0 24 24"
-              fill="white"
-              stroke="currentColor"
+              fill="none"
+              stroke="gray"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -72,8 +116,8 @@ export default function Rightside({
               width="24"
               height="24"
               viewBox="0 0 24 24"
-              fill="white"
-              stroke="currentColor"
+              fill="none"
+              stroke="gray"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -86,8 +130,8 @@ export default function Rightside({
               width="24"
               height="24"
               viewBox="0 0 24 24"
-              fill="white"
-              stroke="currentColor"
+              fill="none"
+              stroke="gray"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"

@@ -2,9 +2,10 @@
 
 import Leftside from "./Leftside";
 import Rightside from "./Rightside";
-import { Magnifier } from "@/icons/Magnifier";
-import { Circle } from "@/components/Circle";
+import { Magnifier } from "../icons/Magnifier";
+import { Circle } from "../components/Circle";
 import { use, useEffect, useState } from "react";
+import Map from "../components/Map";
 
 export default function Home() {
   const [cities, setCities] = useState([]);
@@ -13,8 +14,10 @@ export default function Home() {
   const [changecity, setChangecity] = useState("Ulanbator");
   const [date, setDate] = useState([]);
   const [Rweather, setRWeather] = useState([]);
-  const [condition, setCondition] = useState([]);
-  const [Rcondition, setRCondition] = useState([]);
+  const [condition, setCondition] = useState("");
+  const [Rcondition, setRCondition] = useState("");
+  const [mood, setMood] = useState([]);
+  const [Rmod, setRMod] = useState([]);
 
   async function getweather(city) {
     const result = await fetch(
@@ -26,8 +29,10 @@ export default function Home() {
     setWeather(data.forecast.forecastday[0].day.maxtemp_c);
     setRWeather(data.forecast.forecastday[0].day.mintemp_c);
     setDate(data.forecast.forecastday[0].date);
-    setCondition(data.forecast.forecastday[0].day.condition.text);
+    setCondition(data.current.condition.text);
     setRCondition(data.forecast.forecastday[0].day.condition.text);
+    setMood(data.current.condition.text);
+    setRMod(data.forecast.forecastday[0].day.condition.text);
   }
 
   async function getData() {
@@ -65,8 +70,10 @@ export default function Home() {
         setDate={setDate}
         condition={condition}
         setCondition={setCondition}
+        mood={mood}
+        setMood={setMood}
       />
-      <div className="absolute  bg-white flex flex-col left-[7vw] top-[7.5vh] w-[40vw] h-[7.8vh] rounded-full ">
+      <div className="absolute  bg-white flex flex-col left-[300px] top-[7.5vh] w-[500px] h-[7.8vh] rounded-full ">
         <div>
           <div className="w-[30px] h-[30px] top-6  left-5 absolute">
             <Magnifier />
@@ -80,19 +87,22 @@ export default function Home() {
             id=""
             onChange={searchHandler}
           />
-        </div>
-        <div className="bg-gray-100 absolute  mt-24 ml-10 truncate ">
-          {searched.length > 0 &&
-            searched.slice(0, 10).map((city, index) => (
-              <p
-                className="cursor-pointer  font-bold text-gray-900 text-4xl"
-                key={index}
-                onClick={() => getweather(city)}
-              >
-                {city}{" "}
-              </p>
+        </div>{" "}
+        {searched.length > 0 && (
+          <div className="absolute top-[70px] transform-translate-x-1/2 w-[500px] mt-2 rounded-3xl bg-white/80 py-4 shadow-lg backdrop-blur-md  ">
+            {searched.slice(0, 4).map((city, index) => (
+              <div key={index}>
+                <Map />
+                <p
+                  className="cursor-pointer flex px-6 py-2 items-center gap-4 hover:bg-gray-100 active:bg-gray-200 transition-all"
+                  onClick={() => getweather(city)}
+                >
+                  {city}{" "}
+                </p>
+              </div>
             ))}
-        </div>
+          </div>
+        )}
       </div>
       <Rightside
         Rweather={Rweather}
@@ -103,6 +113,8 @@ export default function Home() {
         setDate={setDate}
         Rcondition={Rcondition}
         setRCondition={setRCondition}
+        Rmod={Rmod}
+        setRMod={setRMod}
       />
     </div>
   );

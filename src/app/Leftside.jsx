@@ -1,14 +1,51 @@
-import { Sun } from "@/icons/Sun";
+import Mood from "../components/Mood";
+import { Sun } from "../icons/Sun";
+import { Component } from "react";
 
 export default function Leftside({
-  getweather,
   weather,
-  searched,
-  setChangecity,
   changecity,
   date,
   condition,
+  mood,
+  setMood,
 }) {
+  const Left = { weather, changecity, date, condition, mood };
+  const weatherIconLeft = () => {
+    const Icons = condition.toLowerCase();
+    switch (true) {
+      case Icons.includes("mist"):
+        return <img src="/Clouds.png" alt="" />;
+    }
+    switch (true) {
+      case Icons.includes("sunny"):
+        return <img src="/Clouds.png" alt="" />;
+    }
+    switch (true) {
+      case Icons.includes("cloud"):
+        return <img src="/Clouds.png" alt="" />;
+    }
+    switch (true) {
+      case Icons.includes("rain"):
+        return <img src="/Rain.png" alt="" />;
+    }
+    switch (true) {
+      case Icons.includes("snow"):
+        return <img src="/Snow.png" alt="" />;
+    }
+    switch (true) {
+      case Icons.includes("wind"):
+        return <img src="/Wind.png" alt="" />;
+    }
+    switch (true) {
+      case Icons.includes("clear"):
+        return <img src="/Sun.png" alt="" />;
+    }
+    switch (true) {
+      case Icons.includes("thunder"):
+        return <img src="/Storm.png" alt="" />;
+    }
+  };
   return (
     <div className="bg-[#F3F4F6] w-[50vw] h-[100vh] rounded-[20px] ">
       <div className="relative w-[350px] h-[800px] m-auto mt-40">
@@ -16,28 +53,37 @@ export default function Leftside({
           <Sun />
         </div>
         <div className="relative bg-[rgba(255,255,255,0.75)]  size-full w-[400px] flex flex-col  rounded-[50px]  ">
-          <p>{date}</p>
-          <div className="flex flex-row">
-            <h1 className="text-black text-[50px] flex">{changecity}</h1>
+          <p className=" text-gray-400 bg-#9CA3AF mt-[34px] ml-[38px] font-medium text-[20px]">
+            {date}
+          </p>
+          <div className="flex flex-row ml-6 text-lg leading-20">
+            <h1 className="text-black text-[50px] mt-4 font-bold flex">
+              {changecity}
+            </h1>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
+              width="34"
+              height="34"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
+              className="mr-6 mt-4 ml-8"
             >
               <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
               <circle cx="12" cy="10" r="3" />
             </svg>
           </div>
-          <img className="w-[250px] m-auto" src="/sun.png" alt="" />
-          <h2 className="text-black text-8xl ">{weather}</h2>
-          <p className="text-5xl">{condition}</p>
-          <div className="flex gap-20 m-auto">
+          {weatherIconLeft(condition)}
+          <div className="h-[120px] ml-[40px]">
+            <h2 className="text-black text-8xl bg-gradient-to-b from-slate-800 to-gray-300 inline-block text-transparent bg-clip-text">
+              {weather}°C
+            </h2>
+          </div>
+          <p className="text-orange-400 text-2xl ml-[40px]">{condition}</p>
+          <div className="flex justify-between m-auto w-[318px] h-[32px]  ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -58,7 +104,7 @@ export default function Leftside({
               height="24"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="currentColor"
+              stroke="gray"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -72,7 +118,7 @@ export default function Leftside({
               height="24"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="currentColor"
+              stroke="gray"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -86,7 +132,7 @@ export default function Leftside({
               height="24"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="currentColor"
+              stroke="gray"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
