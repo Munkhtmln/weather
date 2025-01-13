@@ -22,6 +22,10 @@ export default function Leftside({
         return <img src="/Clouds.png" alt="" />;
     }
     switch (true) {
+      case Icons.includes("overcast"):
+        return <img src="/Clouds.png" alt="" />;
+    }
+    switch (true) {
       case Icons.includes("cloud"):
         return <img src="/Clouds.png" alt="" />;
     }
